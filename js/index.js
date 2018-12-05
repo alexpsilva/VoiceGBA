@@ -49,6 +49,7 @@ var firstPress = {};
 window.addEventListener('keypress', function(e) {
     if (firstPress[e.keyCode] === undefined) {
         if (e.keyCode == 32) { //Spacebar
+            audioContext.resume();
             console.log('key down');
             recorder.start(0);
         }

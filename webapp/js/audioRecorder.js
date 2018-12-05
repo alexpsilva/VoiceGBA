@@ -1,12 +1,21 @@
 (function(window) {
     var AUDIO_RECORDER_WORKER = 'js/audioRecorderWorker.js';
     var AudioRecorder = function(source, cfg) {
-        this.consumers = [];
-        this.consumers.push({
-            postMessage: function(data) {
-                console.log(data.data);
+        var consumer = {
+            audio: [],
+            postMessage: function(sample) {
+                console.log(sample.data);
+                if (sample.command == 'start') {
+                    this.audio = []
+                } else if (sample.command === 'stop') {
+                    this.audio = this.audio.join().split(',')
+                    console.log('this.audio -> DTW')
+                } else {
+                    this.audio.push(sample.data)
+                }
             }
-        })
+        }
+        this.consumers = [consumer];
         var config = cfg || {};
         var errorCallback = config.errorCallback || function() {};
         var inputBufferLength = config.inputBufferLength || 4096;
