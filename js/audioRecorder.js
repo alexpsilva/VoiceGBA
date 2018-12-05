@@ -1,5 +1,12 @@
 (function(window) {
-    var AUDIO_RECORDER_WORKER = 'js/audioRecorderWorker.js';
+    function download(content, fileName, contentType) {
+        var a = document.createElement("a");
+        var file = new Blob([content], { type: contentType });
+        a.href = URL.createObjectURL(file);
+        a.download = fileName;
+        a.click();
+    }
+    var AUDIO_RECORDER_WORKER = './audioRecorderWorker.js';
     var AudioRecorder = function(source, cfg) {
         var consumer = {
             audio: [],
@@ -8,7 +15,8 @@
                 if (sample.command == 'start') {
                     this.audio = []
                 } else if (sample.command === 'stop') {
-                    this.audio = this.audio.join().split(',')
+                    this.audio = this.audio.join().split(',').map((i) => parseInt(i))
+                    download(JSON.stringify(this.audio), 'teste.json', 'application/json');
                     console.log('this.audio -> DTW')
                 } else {
                     this.audio.push(sample.data)

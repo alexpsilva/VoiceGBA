@@ -13,7 +13,7 @@ function startUserMedia(stream) {
         'inputBufferLength': 4096,
         'outputBufferLength': 4000,
         'outputSampleRate': 16000,
-        'worker': 'webapp/js/audioRecorderWorker.js'
+        'worker': 'js/audioRecorderWorker.js'
     }
 
     recorder = new AudioRecorder(input, config);
