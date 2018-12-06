@@ -6,7 +6,7 @@
         a.download = fileName;
         a.click();
     }
-    var AUDIO_RECORDER_WORKER = './audioRecorderWorker.js';
+    var AUDIO_RECORDER_WORKER = 'js/pocketsphinx/audioRecorderWorker.js';
     var AudioRecorder = function(source, cfg) {
         var consumer = {
             audio: [],
@@ -15,9 +15,9 @@
                 if (sample.command == 'start') {
                     this.audio = []
                 } else if (sample.command === 'stop') {
-                    this.audio = this.audio.join().split(',').map((i) => parseInt(i))
-                    download(JSON.stringify(this.audio), 'teste.json', 'application/json');
-                    console.log('this.audio -> DTW')
+                    this.audio = this.audio.join().split(',').map((i) => parseInt(i));
+                    // download(JSON.stringify(this.audio), 'teste.json', 'application/json');
+                    recognizer.recognize(this.audio);
                 } else {
                     this.audio.push(sample.data)
                 }
