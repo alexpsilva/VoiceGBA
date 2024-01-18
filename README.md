@@ -1,6 +1,6 @@
 # VoiceGBA
 
-This project was an assignment of the "Telecommunications" class from UFRJ of 2018. 
+This project was an assignment of the "Telecommunications" class of 2018 from UFRJ. 
 It allows controlling a GBA emulator through voice commands.
 
 
